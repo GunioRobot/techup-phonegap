@@ -4,3 +4,7 @@
 .DS_Store
 build
 www/phonegap.js
+bin
+gen
+local.properties
+proguard.cfg
