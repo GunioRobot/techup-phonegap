@@ -1,48 +1,71 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
   <head>
-	<!-- Change this if you want to allow scaling -->
+    <!-- Change this if you want to allow scaling -->
     <meta name="viewport" content="width=default-width; user-scalable=no" />
 
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 
     <title>techup-phonegap</title>
-	
-	<!-- iPad/iPhone specific css below, add after your main css >
-	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
-	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
-	-->
-	<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+
+    <!-- iPad/iPhone specific css below, add after your main css >
+    <link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />
+    -->
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <link rel="stylesheet" href="jquery.mobile-1.0a2.css" />
     <script src="jquery-1.4.4.min.js"></script>
     <script src="jquery.mobile-1.0a2.js"></script>
     <script src="techup.js"></script>
     <script type="text/javascript" charset="utf-8">
+    function onBodyLoad()
+    {
+        document.addEventListener("deviceready",onDeviceReady,false);
+    }
 
+    /* When this function is called, PhoneGap has been initialized and is ready to roll */
+    function onDeviceReady()
+    {
+        // do your thing!
+    }
 
-	// If you want to prevent dragging, uncomment this section
-	/*
-	function preventBehavior(e) 
-	{ 
-      e.preventDefault(); 
-    };
-	document.addEventListener("touchmove", preventBehavior, false);
-	*/
-	
-	function onBodyLoad()
-	{
-		document.addEventListener("deviceready",onDeviceReady,false);
-	}
-	
-	/* When this function is called, PhoneGap has been initialized and is ready to roll */
-	function onDeviceReady()
-	{
-		// do your thing!
-	}
-    
     </script>
   </head>
   <body onload="onBodyLoad()">
-  	
+        <!-- Start of first page -->
+        <div data-role="page" id="foo">
+
+            <div data-role="header">
+                <h1>Foo</h1>
+            </div><!-- /header -->
+
+            <div data-role="content">
+                <p>I'm first in the source order so I'm shown as the page.</p>
+                <p>View internal page called <a href="#bar">bar</a></p>
+            </div><!-- /content -->
+
+            <div data-role="footer">
+                <h4>Page Footer</h4>
+            </div><!-- /header -->
+        </div><!-- /page -->
+
+
+        <!-- Start of second page -->
+        <div data-role="page" id="bar">
+
+            <div data-role="header">
+                <h1>Bar</h1>
+            </div><!-- /header -->
+
+            <div data-role="content">
+                <p>I'm first in the source order so I'm shown as the page.</p>
+                <p><a href="#foo">Back to foo</a></p>
+            </div><!-- /content -->
+
+            <div data-role="footer">
+                <h4>Page Footer</h4>
+            </div><!-- /header -->
+        </div><!-- /page -->
+
   </body>
 </html>
