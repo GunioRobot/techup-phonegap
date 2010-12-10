@@ -30,6 +30,25 @@
     }
 
     </script>
+    <style type="text/css">
+        .attendeelist li .ui-li-thumb {
+             margin-top: -6px;
+        }
+        .attendeelist li .ui-icon-arrow-r {
+             display: none;
+        }
+        .tagbox {
+            margin-top: 8px;
+        }
+        .tag, a.tag{
+            text-decoration: none;
+            border-radius: 4px ;
+            margin-right: 2px;
+            padding: 2px 6px;
+            font-weight: normal;
+            text-shadow: none;
+        }
+    </style>
   </head>
   <body onload="onBodyLoad()">
         <!-- Start of first page -->
@@ -42,19 +61,19 @@
             <div data-role="content">
 
                 <ul data-role="listview" data-theme="c">
-                	<li data-role="list-divider">Today</li>
-                	<li>
-                	    <h3><a href="#bar">Zürich Semantic Web Meetup</a></h3>
-                	    <p class="ui-li-desc">19:30 - 20:00, Zürich</p>
-                	</li>
-                	<li><a href="#bar">WebSphere MQ and WebSphere Process Server workshop</a></li>
-                	<li data-role="list-divider">Tuesday, Dec 14 2010</li>
-                	<li>
-                	    <h3><a href="#bar">JS Zürich - Genesis</a></h3>
-                	    <p class="ui-li-desc">Monday - Saturday, Zürich</p>
-                	</li>
+                    <li data-role="list-divider">Today</li>
+                    <li>
+                        <h3><a href="#bar">Zürich Semantic Web Meetup</a></h3>
+                        <p class="ui-li-desc">19:30 - 20:00, Zürich</p>
+                    </li>
+                    <li><a href="#detailview">WebSphere MQ and WebSphere Process Server workshop</a></li>
+                    <li data-role="list-divider">Tuesday, Dec 14 2010</li>
+                    <li>
+                        <h3><a href="#detailview">JS Zürich - Genesis</a></h3>
+                        <p class="ui-li-desc">Monday - Saturday, Zürich</p>
+                    </li>
                 </ul>
-                
+
             </div><!-- /content -->
 
             <div data-role="footer">
@@ -64,21 +83,74 @@
 
 
         <!-- Start of second page -->
-        <div data-role="page" id="bar">
+        <div data-role="page" id="detailview">
 
             <div data-role="header">
                 <h1>&nbsp;</h1>
             </div><!-- /header -->
 
             <div data-role="content">
-                <p>I'm first in the source order so I'm shown as the page.</p>
-                <p><a href="#foo">Back to foo</a></p>
+                <h3>Certified Java Enterprise Architect Bootcamp</h3>
+                <span id="eventDate">Mon, January 24th at 08:00</span><br>
+                <span id="eventLocation">Technopark, Technoparkstrasse 1, Zürich</span><br>
+                <span id="eventUrl">http://aberla.com/</span>
+
+                <p id="description">Become a Java architect in six days!<br>
+You are an experienced enterprise archite...</p>
+                <div id="pricebox">
+                    <strong>Price:</strong> <span id="price">CHF 6450</span>
+                </div>
+                <br>
+                <strong>Related Meetups:</strong><br>
+                <div class="tagbox">
+                    <a href="#foo" class="tag">java</a>
+                    <a href="#foo" class="tag">architect</a>
+                    <a href="#foo" class="tag">bootcamp</a>
+                    <a href="#foo" class="tag">certified</a>
+                </div>
+                <ul data-role="listview" data-theme="c" data-inset="true">
+                    <li><a href="#map">Map</a></li>
+                    <li><a href="#attendees">Attendees</a></li>
+                </ul>
+
+
             </div><!-- /content -->
 
-            <div data-role="footer">
+            <div data-role="footer" data-position="fixed">
                 <h4>Page Footer</h4>
             </div><!-- /header -->
         </div><!-- /page -->
+
+        <div data-role="page" id="map">
+            <div data-role="header">
+                <h1>&nbsp;</h1>
+            </div><!-- /header -->
+            <div data-role="content">
+                <small>Certified Java Enterprise Architect Bootcamp</small>
+                <h3>Technopark, Technoparkstrasse 1, Zürich</h3>
+                <a href="/javascript:Device.exec("openmap:q=roma');">Open in Google Maps</a>
+                MAP HERE
+            </div>
+        </div>
+
+        <div data-role="page" id="attendees">
+            <div data-role="header">
+                <h1>&nbsp;</h1>
+            </div><!-- /header -->
+            <div data-role="content">
+                <small>Certified Java Enterprise Architect Bootcamp</small>
+                <h3>Attendees</h3>
+
+                <ul class="attendeelist "data-role="listview" data-theme="c" data-inset="true">
+                    <li ><img src="http://img.tweetimag.es/i/bratwurstkomet_m" class="ui-li-icon"><a href="#foo">Bratwurstkomet</a></li>
+                    <li ><img src="http://img.tweetimag.es/i/bratwurstkomet_m" class="ui-li-icon"><a href="#foo">Bratwurstkomet</a></li>
+                    <li ><a href="#foo"><img src="http://img.tweetimag.es/i/bratwurstkomet_m" class="ui-li-icon">Bratwurstkomet</a></li>
+
+                </ul>
+
+
+            </div>
+        </div>
 
   </body>
 </html>
