@@ -46,6 +46,17 @@
             <% } %>
         ]]>
         </script>
+
+        <script type="text/x-jqote-template" id="mapTemplate">
+        <![CDATA[
+            <small><% this.name %></small>
+            <h3><% this.location %></h3>
+            <a href="javascript:Device.exec('openmap:q=<% this.location %>');">Open in Google Maps</a>
+            <div id="meetupMap" style="width:100%; height:260px">
+            </div>
+        ]]>
+        </script>
+
     </head>
     <body>
         <div data-role="page" id="foo">
@@ -85,12 +96,7 @@
             <div data-role="header">
                 <h1>&nbsp;</h1>
             </div>
-            <div data-role="content">
-                <small>Certified Java Enterprise Architect Bootcamp</small>
-                <h3>Technopark, Technoparkstrasse 1, Zürich</h3>
-                <a href="/javascript:Device.exec('openmap:q=roma');">Open in Google Maps</a>
-                <div id="meetupMap" style="width:100%; height:260px">
-                </div>
+            <div data-role="content" id="mapContent">
             </div>
         </div>
 
