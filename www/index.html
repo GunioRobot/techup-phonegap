@@ -6,14 +6,14 @@
 
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 
-    <title>techup-phonegap</title>
+    <title>Upcoming Meetups - techup.ch</title>
 
     <!-- iPad/iPhone specific css below, add after your main css >
     <link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />
     <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />
     -->
-    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <link rel="stylesheet" href="jquery.mobile-1.0a2.css" />
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <script src="jquery-1.4.4.min.js"></script>
     <script src="jquery.mobile-1.0a2.js"></script>
     <script src="techup.js"></script>
@@ -36,12 +36,25 @@
         <div data-role="page" id="foo">
 
             <div data-role="header">
-                <h1>Foo</h1>
+                <h1>Upcoming Meetups</h1>
             </div><!-- /header -->
 
             <div data-role="content">
-                <p>I'm first in the source order so I'm shown as the page.</p>
-                <p>View internal page called <a href="#bar">bar</a></p>
+
+                <ul data-role="listview" data-theme="c">
+                	<li data-role="list-divider">Today</li>
+                	<li>
+                	    <h3><a href="#bar">Zürich Semantic Web Meetup</a></h3>
+                	    <p class="ui-li-desc">19:30 - 20:00, Zürich</p>
+                	</li>
+                	<li><a href="#bar">WebSphere MQ and WebSphere Process Server workshop</a></li>
+                	<li data-role="list-divider">Tuesday, Dec 14 2010</li>
+                	<li>
+                	    <h3><a href="#bar">JS Zürich - Genesis</a></h3>
+                	    <p class="ui-li-desc">Monday - Saturday, Zürich</p>
+                	</li>
+                </ul>
+                
             </div><!-- /content -->
 
             <div data-role="footer">
@@ -54,7 +67,7 @@
         <div data-role="page" id="bar">
 
             <div data-role="header">
-                <h1>Bar</h1>
+                <h1>&nbsp;</h1>
             </div><!-- /header -->
 
             <div data-role="content">
