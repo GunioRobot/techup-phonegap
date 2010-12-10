@@ -1,6 +1,9 @@
+var loadMap, initMap;
+
 (function ($) {
-    var getApiData, getApiDataSuccess, getApiDataFail, buildCurrentTimestamp, getlastRefresh, storeDataInStorage, retrieveEvents;
-    
+    var getApiData, getApiDataSuccess, getApiDataFail, buildCurrentTimestamp, getlastRefresh, storeDataInStorage,
+    retrieveEvents, apiLoadingStarted = false, i=1;
+
     getApiData = function () {
         var url, container;
         // Api definition
@@ -8,9 +11,8 @@
         // /api/events/upcoming.json
         // /api/events/past.json
         // /api/user/$twittername.json
-        
         //console.log(JSON.parse(localStorage.getItem("events")));
-        
+
         if (buildCurrentTimestamp() < (getlastRefresh() + 5)) {
             console.log('Used Cached Data');
             render();
@@ -24,7 +26,7 @@
             dataType: 'json'
         });
     };
-    
+
     getApiDataFail = function (e) {
         alert('Could not connect to the API, probably a cross domain problem.');
     };
@@ -67,6 +69,7 @@
                 var index = $(e.target).parent('li').data('index');
                 var selectedMeetup = events[index];
                 $('#detailViewContent').jqotesub('#detailViewTemplate', selectedMeetup);
+                $('#detailview').data('meetup', selectedMeetup);
                 $.mobile.changePage('#detailview');
                 $.mobile.updateHash('#detailview/' + index); // This is a hack related to http://forum.jquery.com/topic/changepage-not-updating-hash-for-internal-div-pages
             })
@@ -78,12 +81,35 @@
         if (typeof(localStorage) == 'undefined') {
             alert('Local storage not supported by this browser.');
         }
-        
+
         localStorage.setItem("events", JSON.stringify(data.events));
         localStorage.setItem("lastRefresh", buildCurrentTimestamp());
         render();
     };
 
-    getApiData();    
-
+    getApiData();
 }(jQuery));
+
+loadMap = function() {
+    $('body').append('<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&callback=initMap&language=en&v=3.1"></script>');
+
+    initMap = function() {
+        var location, map, marker, meetup;
+
+        meetup = $('#detailview').data('meetup');
+        console.log(meetup);
+        location = new google.maps.LatLng(meetup.lat, meetup.lon);
+        map = new google.maps.Map($('#meetupMap')[0], {
+            zoom: 14,
+            center: location,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeControlOptions: {
+                mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.HYBRID]
+            }
+        });
+        marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    }
+}
