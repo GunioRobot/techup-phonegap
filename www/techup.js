@@ -73,7 +73,7 @@ window.techup = (function ($) {
     };
 
     showMap = function() {
-        if (google === undefined) {
+        if (typeof(google) === 'undefined') {
             $('body').append('<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&callback=techup.initMap&language=en&v=3.1"></script>');
         } else {
             initMap();
