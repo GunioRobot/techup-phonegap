@@ -1,30 +1,30 @@
-var loadMap, initMap;
+var techup;
 
-(function ($) {
-    var getApiData, getApiDataSuccess, getApiDataFail, buildCurrentTimestamp, getlastRefresh, storeDataInStorage,
-    retrieveEvents, apiLoadingStarted = false, i=1;
+techup = (function ($) {
+    var initialize, getApiDataSuccess, getApiDataFail, getLastRefresh,
+    showMap, initMap, retrieveEvents;
 
-    getApiData = function () {
-        var url, container;
+    initialize = function () {
         // Api definition
         // /api/event/$id.json
         // /api/events/upcoming.json
         // /api/events/past.json
         // /api/user/$twittername.json
-        //console.log(JSON.parse(localStorage.getItem("events")));
 
-        if (buildCurrentTimestamp() < (getlastRefresh() + 5)) {
+        if (new Date().getTime() < (getLastRefresh() + 5000)) {
             console.log('Used Cached Data');
             render();
-            return;
+        } else {
+            console.log('Updating API Data');
+            $.ajax({
+                url: 'http://techup.ch/api/events/upcoming.json',
+                success: getApiDataSuccess,
+                error: getApiDataFail,
+                dataType: 'json'
+            });
         }
-        console.log('Updating API Data');
-        $.ajax({
-            url: 'http://techup.ch/api/events/upcoming.json',
-            success: getApiDataSuccess,
-            error: getApiDataFail,
-            dataType: 'json'
-        });
+
+        $('#showMap').click(showMap);
     };
 
     getApiDataFail = function (e) {
@@ -32,20 +32,13 @@ var loadMap, initMap;
     };
 
     getApiDataSuccess = function (data) {
-        storeDataInStorage(data);
+        localStorage.setItem("events", JSON.stringify(data.events));
+        localStorage.setItem("lastRefresh", new Date().getTime());
+        render();
     };
 
-    buildCurrentTimestamp = function () {
-        var timestamp = new Date().getTime();
-        timestamp = parseInt(timestamp / 1000, 10);
-        return timestamp;
-    };
-
-    getlastRefresh = function () {
+    getLastRefresh = function () {
         var lastRefresh;
-        if (typeof(localStorage) == 'undefined') {
-            alert('Local storage not supported by this browser.');
-        }
         lastRefresh = localStorage.getItem("lastRefresh");
         if (lastRefresh === null) {
             return 0;
@@ -58,9 +51,10 @@ var loadMap, initMap;
     };
 
     render = function () {
-        var events = retrieveEvents();
-        var ul = $('#content');
-        var li = '';
+        var events, ul, li;
+        events = retrieveEvents();
+        ul = $('#content');
+        li = '';
         $.each(events, function (id, event) {
             li = li + '<li data-index=' + id + '><h3>' + event.name + '</h3><p class="ui-li-desc">' + event.dateFrom.date + ' - ' + event.dateTo.date + ', ' + event.city + '</p></li>';
         });
@@ -76,22 +70,13 @@ var loadMap, initMap;
             .listview('refresh', true);
     };
 
-    storeDataInStorage = function (data) {
-        var timestamp = 0;
-        if (typeof(localStorage) == 'undefined') {
-            alert('Local storage not supported by this browser.');
+    showMap = function() {
+        if (google === undefined) {
+            $('body').append('<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&callback=techup.initMap&language=en&v=3.1"></script>');
+        } else {
+            initMap();
         }
-
-        localStorage.setItem("events", JSON.stringify(data.events));
-        localStorage.setItem("lastRefresh", buildCurrentTimestamp());
-        render();
     };
-
-    getApiData();
-}(jQuery));
-
-loadMap = function() {
-    $('body').append('<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&callback=initMap&language=en&v=3.1"></script>');
 
     initMap = function() {
         var location, map, marker, meetup;
@@ -111,5 +96,21 @@ loadMap = function() {
             position: location,
             map: map
         });
+    };
+
+    $(document).bind('deviceready', function() {
+        initialize();
+    });
+
+    // init hack for browser debugging
+    if (navigator.userAgent.indexOf('Windows') ||
+        navigator.userAgent.indexOf('Linux') ||
+        navigator.userAgent.indexOf('Macintosh')) {
+        initialize();
     }
-}
+
+    return {
+        initMap: initMap
+    }
+
+}(jQuery));

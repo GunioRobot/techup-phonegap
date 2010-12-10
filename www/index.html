@@ -1,129 +1,94 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!-- Change this if you want to allow scaling -->
-    <meta name="viewport" content="width=default-width; user-scalable=no" />
+    <head>
+        <!-- Change this if you want to allow scaling -->
+        <meta name="viewport" content="width=default-width; user-scalable=no" />
 
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 
-    <title>Upcoming Meetups - techup.ch</title>
+        <title>Upcoming</title>
 
-    <!-- iPad/iPhone specific css below, add after your main css >
-    <link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />
-    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />
-    -->
+        <!-- iPad/iPhone specific css below, add after your main css >
+        <link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />
+        <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />
+        -->
 
-    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+        <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 
-    <!-- <script src="jquery-1.4.4.min.js"></script> -->
-    
-    <!-- <script src="http://code.jquery.com/jquery-1.4.4.js"></script> -->
-    <script src="jquery-1.4.4.min.js"></script>
-    <script src="jquery.jqote2.min.js"></script>
-    <script src="techup.js"></script>
+        <!-- <script src="http://code.jquery.com/jquery-1.4.4.js"></script> -->
+        <script src="jquery-1.4.4.min.js"></script>
+        <script src="jquery.jqote2.min.js"></script>
+        <script src="techup.js"></script>
 
-    <link rel="stylesheet" href="jquery.mobile-1.0a2.css" />
-    <!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" /> -->
+        <link rel="stylesheet" href="jquery.mobile-1.0a2.css" type="text/css" />
+        <!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" /> -->
 
-    <script src="jquery.mobile-1.0a2.min.js"></script>
-    <!-- // <script src="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"></script> -->
+        <!-- <script src="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"></script> -->
+        <script src="jquery.mobile-1.0a2.min.js"></script>
 
-    <script type="text/javascript" charset="utf-8">
-    function onBodyLoad()
-    {
-        document.addEventListener("deviceready",onDeviceReady,false);
-    }
+        <script type="text/x-jqote-template" id="detailViewTemplate">
+        <![CDATA[
+            <h3><%= this.name %></h3>
+            <span><%= (this.dateFrom) ? this.dateFrom.date : '' %></span><br>
+            <span><%= this.location %></span><br>
+            <span><a href="<%= this.link %>"><%= this.link %></a></span>
+            <p><%= this.description %></p>
+            <% if (this.price) { %>
+                <p>
+                    <strong>Price:</strong> <span><%= this.price %> CHF</span>
+                </p>
+            <% } %}
+            <br />
+            <strong>Related Meetups:</strong><br>
+            <div class="meetupTags">
+            <% for (var i=1, cnt=this.tags.length; i<cnt; i++) { %>
+                <span><%= this.tags[i].name %></span>
+            <% } %>
+            </div>
+        ]]>
+        </script>
 
-    /* When this function is called, PhoneGap has been initialized and is ready to roll */
-    function onDeviceReady()
-    {
-        // do your thing!
-    }
-    </script>
-
-    <script type="text/x-jqote-template" id="detailViewTemplate">
-            <![CDATA[
-                <h3><%= this.name %></h3>
-                <span><%= (this.dateFrom) ? this.dateFrom.date : '' %></span><br>
-                <span><%= this.location %></span><br>
-                <span><a href="<%= this.link %>"><%= this.link %></a></span>
-                <p><%= this.description %></p>
-                <div>
-                    <strong>Price:</strong> <span><%= this.price %></span>
-                </div>
-                <br>
-                <strong>Related Meetups:</strong><br>
-                <div class="meetupTags">
-                <% for(tag in this.tags) {%>
-                    <span><%= tag.name%></span>
-                <%}%>
-                </div>
-            ]]>
-    </script>
-
-
-    <style type="text/css">
-        .attendeelist li .ui-li-thumb {
-             margin-top: -6px;
-        }
-        .attendeelist li .ui-icon-arrow-r {
-             display: none;
-        }
-        .tagbox {
-            margin-top: 8px;
-        }
-        .tag, a.tag{
-            text-decoration: none;
-            border-radius: 4px ;
-            margin-right: 2px;
-            padding: 2px 6px;
-            font-weight: normal;
-            text-shadow: none;
-        }
-    </style>
-  </head>
-  <body onload="onBodyLoad()">
-        <!-- Start of first page -->
+        <link rel="stylesheet" href="techup.css" type="text/css" />
+    </head>
+    <body>
         <div data-role="page" id="foo">
 
             <div data-role="header">
-                <h1>Upcoming Meetups</h1>
-            </div><!-- /header -->
+                <h1>Upcoming</h1>
+            </div>
 
             <div data-role="content" >
                 <ul data-role="listview" data-theme="c" id="content">
                 </ul>
-            </div><!-- /content -->
+            </div>
 
-            <div data-role="footer" data-position="fixed">
-                <h4>Page Footer</h4>
-            </div><!-- /header -->
-        </div><!-- /page -->
+            <!-- <div data-role="footer" data-position="fixed">
+                <h4></h4>
+            </div> -->
+        </div>
 
-
-        <!-- Start of second page -->
         <div data-role="page" id="detailview">
             <div data-role="header">
                 <h1>&nbsp;</h1>
-            </div><!-- /header -->
+            </div>
 
             <div data-role="content">
                 <div id="detailViewContent"></div>
                 <ul data-role="listview" data-theme="c" data-inset="true">
-                    <li><a href="#map" onclick="javascript:loadMap()">Map</a></li>
-                    <li><a href="#attendees">Attendees</a></li>
+                    <li><a href="#map" id="showMap">Map</a></li>
+                    <!-- <li><a href="#attendees" id="showAttendees">Attendees</a></li> -->
                 </ul>
-            </div><!-- /content -->
+            </div>
 
             <!-- <div data-role="footer" data-position="fixed">
                 <h4>Page Footer</h4>
             </div> -->
-        </div><!-- /page -->
+        </div>
 
         <div data-role="page" id="map">
             <div data-role="header">
                 <h1>&nbsp;</h1>
-            </div><!-- /header -->
+            </div>
             <div data-role="content">
                 <small>Certified Java Enterprise Architect Bootcamp</small>
                 <h3>Technopark, Technoparkstrasse 1, Zürich</h3>
@@ -136,7 +101,7 @@
         <div data-role="page" id="attendees">
             <div data-role="header">
                 <h1>&nbsp;</h1>
-            </div><!-- /header -->
+            </div>
             <div data-role="content">
                 <small>Certified Java Enterprise Architect Bootcamp</small>
                 <h3>Attendees</h3>
@@ -145,12 +110,9 @@
                     <li ><img src="http://img.tweetimag.es/i/bratwurstkomet_m" class="ui-li-icon"><a href="#foo">Bratwurstkomet</a></li>
                     <li ><img src="http://img.tweetimag.es/i/bratwurstkomet_m" class="ui-li-icon"><a href="#foo">Bratwurstkomet</a></li>
                     <li ><a href="#foo"><img src="http://img.tweetimag.es/i/bratwurstkomet_m" class="ui-li-icon">Bratwurstkomet</a></li>
-
                 </ul>
-
-
             </div>
         </div>
 
-  </body>
+    </body>
 </html>

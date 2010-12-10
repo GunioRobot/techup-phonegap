@@ -1,0 +1,17 @@
+.attendeelist li .ui-li-thumb {
+    margin-top: -6px;
+}
+.attendeelist li .ui-icon-arrow-r {
+    display: none;
+}
+.tagbox {
+    margin-top: 8px;
+}
+.tag, a.tag{
+    text-decoration: none;
+    border-radius: 4px ;
+    margin-right: 2px;
+    padding: 2px 6px;
+    font-weight: normal;
+    text-shadow: none;
+}
