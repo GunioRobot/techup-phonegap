@@ -29,7 +29,7 @@
             <span><%= (this.dateFrom) ? this.dateFrom.date : '' %></span><br>
             <span><%= this.location %></span><br>
             <span><a href="<%= this.link %>"><%= this.link %></a></span>
-            <p><%= this.description %></p>
+            <p><%= this.description.replace(/\n/, '<br/>') %></p>
             <% if (this.price) { %>
                 <p>
                     <strong>Price:</strong> <span><%= this.price %> CHF</span>
