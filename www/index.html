@@ -86,19 +86,22 @@
             </div><!-- /header -->
 
             <div data-role="content">
-                <h3>Certified Java Enterprise Architect Bootcamp</h3>
+                <h3 id="meetupName">Certified Java Enterprise Architect Bootcamp</h3>
                 <span id="eventDate">Mon, January 24th at 08:00</span><br>
-                <span id="eventLocation">Technopark, Technoparkstrasse 1, Zürich</span><br>
-                <span id="eventUrl">http://aberla.com/</span>
+                <span id="meetupLocation">Technopark, Technoparkstrasse 1, Zürich</span><br>
+                <span id="meetupLink">http://aberla.com/</span>
 
-                <p id="description">Become a Java architect in six days!<br>
+                <p id="meetupDescription">Become a Java architect in six days!<br>
 You are an experienced enterprise archite...</p>
                 <div id="pricebox">
                     <strong>Price:</strong> <span id="price">CHF 6450</span>
                 </div>
                 <br>
                 <strong>Related Meetups:</strong><br>
-                <div class="tagbox">
+                <div class="meetupTags">
+                    <!-- city first-->
+                    <a href="#foo" class="tag">Zürich</a>
+                    <!-- now tags -->
                     <a href="#foo" class="tag">java</a>
                     <a href="#foo" class="tag">architect</a>
                     <a href="#foo" class="tag">bootcamp</a>
@@ -108,13 +111,11 @@ You are an experienced enterprise archite...</p>
                     <li><a href="#map">Map</a></li>
                     <li><a href="#attendees">Attendees</a></li>
                 </ul>
-
-
             </div><!-- /content -->
 
-            <div data-role="footer" data-position="fixed">
+            <!-- <div data-role="footer" data-position="fixed">
                 <h4>Page Footer</h4>
-            </div><!-- /header -->
+            </div> -->
         </div><!-- /page -->
 
         <div data-role="page" id="map">
