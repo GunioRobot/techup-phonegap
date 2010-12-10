@@ -60,7 +60,7 @@ window.techup = (function ($) {
         });
         ul.html(li)
             .click(function(e) {
-                var index = $(e.target).parent('li').data('index');
+                var index = $(e.target).closest('li').data('index');
                 var selectedMeetup = events[index];
                 $('#detailViewContent').jqotesub('#detailViewTemplate', selectedMeetup);
                 $('#detailview').data('meetup', selectedMeetup);
