@@ -1,6 +1,4 @@
-var techup;
-
-techup = (function ($) {
+window.techup = (function ($) {
     var initialize, getApiDataSuccess, getApiDataFail, getLastRefresh,
     showMap, initMap, retrieveEvents;
 
@@ -11,11 +9,10 @@ techup = (function ($) {
         // /api/events/past.json
         // /api/user/$twittername.json
 
-        if (new Date().getTime() < (getLastRefresh() + 5000)) {
-            console.log('Used Cached Data');
-            render();
-        } else {
-            console.log('Updating API Data');
+        render();
+
+        // refresh outdated cache
+        if (new Date().getTime() > (getLastRefresh() + 3600000)) {
             $.ajax({
                 url: 'http://techup.ch/api/events/upcoming.json',
                 success: getApiDataSuccess,
@@ -55,6 +52,9 @@ techup = (function ($) {
         events = retrieveEvents();
         ul = $('#content');
         li = '';
+        if (events === null) {
+            return;
+        }
         $.each(events, function (id, event) {
             li = li + '<li data-index=' + id + '><h3>' + event.name + '</h3><p class="ui-li-desc">' + event.dateFrom.date + ' - ' + event.dateTo.date + ', ' + event.city + '</p></li>';
         });
@@ -106,11 +106,12 @@ techup = (function ($) {
     if (navigator.userAgent.indexOf('Windows') ||
         navigator.userAgent.indexOf('Linux') ||
         navigator.userAgent.indexOf('Macintosh')) {
-        initialize();
+        $(function() {
+            initialize();
+        });
     }
 
     return {
         initMap: initMap
     }
-
 }(jQuery));
