@@ -16,15 +16,17 @@
     <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 
     <!-- <script src="jquery-1.4.4.min.js"></script> -->
-	<script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+    
+    <!-- <script src="http://code.jquery.com/jquery-1.4.4.js"></script> -->
+    <script src="jquery-1.4.4.min.js"></script>
     <script src="jquery.jqote2.min.js"></script>
     <script src="techup.js"></script>
 
-    <!-- <link rel="stylesheet" href="jquery.mobile-1.0a2.css" /> -->
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" />
+    <link rel="stylesheet" href="jquery.mobile-1.0a2.css" />
+    <!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" /> -->
 
-	<!-- <script src="jquery.mobile-1.0a2.js"></script> -->
-	<script src="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"></script>
+    <script src="jquery.mobile-1.0a2.min.js"></script>
+    <!-- // <script src="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"></script> -->
 
     <script type="text/javascript" charset="utf-8">
     function onBodyLoad()
@@ -42,7 +44,7 @@
     <script type="text/x-jqote-template" id="detailViewTemplate">
             <![CDATA[
                 <h3><%= this.name %></h3>
-                <span><%= this.dateFrom.date %></span><br>
+                <span><%= (this.dateFrom) ? this.dateFrom.date : '' %></span><br>
                 <span><%= this.location %></span><br>
                 <span><a href="<%= this.link %>"><%= this.link %></a></span>
                 <p><%= this.description %></p>

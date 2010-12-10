@@ -28,17 +28,17 @@
     getApiDataFail = function (e) {
         alert('Could not connect to the API, probably a cross domain problem.');
     };
-        
+
     getApiDataSuccess = function (data) {
         storeDataInStorage(data);
     };
-    
+
     buildCurrentTimestamp = function () {
         var timestamp = new Date().getTime();
         timestamp = parseInt(timestamp / 1000, 10);
         return timestamp;
     };
-    
+
     getlastRefresh = function () {
         var lastRefresh;
         if (typeof(localStorage) == 'undefined') {
@@ -50,11 +50,11 @@
         }
         return parseInt(lastRefresh, 10);
     };
-    
+
     retrieveEvents = function () {
         return JSON.parse(localStorage.getItem("events"));
     };
-    
+
     render = function () {
         var events = retrieveEvents();
         var ul = $('#content');
@@ -72,43 +72,18 @@
             })
             .listview('refresh', true);
     };
-    
+
     storeDataInStorage = function (data) {
         var timestamp = 0;
         if (typeof(localStorage) == 'undefined') {
             alert('Local storage not supported by this browser.');
         }
-
-        // var mycount = localStorage.length;
-        
-        // $.forEach(data.events, function (id, value) {
-        //            
-        //        });
-
-        //this populates localStorage with a few links if there are none
-        // if (mycount<1) {
-        // timestamp = new Date().getTime();
-        //         timestamp = parseInt(timestamp / 1000, 10);
-        
-        
         
         localStorage.setItem("events", JSON.stringify(data.events));
         localStorage.setItem("lastRefresh", buildCurrentTimestamp());
         render();
-            // localStorage.setItem("Grand Rapids",
-            // "loadFlickr('72157621350530834','37054878@N03')");
-        // }
-
-        // for ( var i=0, len=mycount; i<len; i++ ){
-        //             var myitem = localStorage.key(i);
-        //             var mylink = localStorage.getItem(myitem); 
-        //             var myli = "<li><a href=\"javascript:" + mylink + "\">" + myitem + "</a></li>";
-        //             $('#nav').append(myli);
-        //         }
     };
-    
-    
-    getApiData();
-    
+
+    getApiData();    
 
 }(jQuery));

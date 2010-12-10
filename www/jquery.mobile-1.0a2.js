@@ -3256,7 +3256,7 @@ $.fn.grid = function(options){
 			
 			//trigger before show/hide events
 			from.data("page")._trigger("beforehide", {nextPage: to});
-			to.data("page")._trigger("beforeshow", {prevPage: from});
+            to.data("page")._trigger("beforeshow", {prevPage: from});
 			
 			function loadComplete(){
 				pageLoading( true );
