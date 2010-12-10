@@ -64,15 +64,17 @@
     
     render = function () {
         var events = retrieveEvents();
-        var ul;
+        var ul = $('#content');
         var li = '';
         $.each(events, function (id, event) {
-            li = li + '<li><h3><a href="#bar">' + event.name + '</a></h3><p class="ui-li-desc">' + event.dateFrom.date + ' - ' + event.dateTo.date + ', ' + event.city + '</p></li>';
-            console.log(event);        
+            li = li + '<li data-index=' + id + '><h3><a href="#bar">' + event.name + '</a></h3><p class="ui-li-desc">' + event.dateFrom.date + ' - ' + event.dateTo.date + ', ' + event.city + '</p></li>';
         });
         //ul = '<ul data-role="listview" data-theme="c">'+ li +'</ul>';
-        $('#content').html(li);
-        $('#content').listview('refresh', true);
+        // ul.html(li)
+        //             .listview('refresh', true)
+        //             .touch(function(e) {
+        //                 var selectedMeetup = events[$(e.target).parent('li').data('index')];
+        //             });
     };
     
     storeDataInStorage = function (data) {
