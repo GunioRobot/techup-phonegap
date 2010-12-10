@@ -12,11 +12,20 @@
     <link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />
     <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />
     -->
-    <link rel="stylesheet" href="jquery.mobile-1.0a2.css" />
+    
     <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-    <script src="jquery-1.4.4.min.js"></script>
-    <script src="jquery.mobile-1.0a2.js"></script>
+
+    <!-- <script src="jquery-1.4.4.min.js"></script> -->
+	<script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+
     <script src="techup.js"></script>
+    
+    <!-- <link rel="stylesheet" href="jquery.mobile-1.0a2.css" /> -->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" />
+	
+	<!-- <script src="jquery.mobile-1.0a2.js"></script> -->
+	<script src="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"></script>
+    
     <script type="text/javascript" charset="utf-8">
     function onBodyLoad()
     {
@@ -58,25 +67,12 @@
                 <h1>Upcoming Meetups</h1>
             </div><!-- /header -->
 
-            <div data-role="content">
-
-                <ul data-role="listview" data-theme="c">
-                    <li data-role="list-divider">Today</li>
-                    <li>
-                        <h3><a href="#bar">Zürich Semantic Web Meetup</a></h3>
-                        <p class="ui-li-desc">19:30 - 20:00, Zürich</p>
-                    </li>
-                    <li><a href="#detailview">WebSphere MQ and WebSphere Process Server workshop</a></li>
-                    <li data-role="list-divider">Tuesday, Dec 14 2010</li>
-                    <li>
-                        <h3><a href="#detailview">JS Zürich - Genesis</a></h3>
-                        <p class="ui-li-desc">Monday - Saturday, Zürich</p>
-                    </li>
+            <div data-role="content" >
+                <ul data-role="listview" data-theme="c" id="content">
                 </ul>
-
             </div><!-- /content -->
 
-            <div data-role="footer">
+            <div data-role="footer" data-position="fixed">
                 <h4>Page Footer</h4>
             </div><!-- /header -->
         </div><!-- /page -->
@@ -128,7 +124,7 @@ You are an experienced enterprise archite...</p>
             <div data-role="content">
                 <small>Certified Java Enterprise Architect Bootcamp</small>
                 <h3>Technopark, Technoparkstrasse 1, Zürich</h3>
-                <a href="/javascript:Device.exec("openmap:q=roma');">Open in Google Maps</a>
+                <a href="/javascript:Device.exec('openmap:q=roma');">Open in Google Maps</a>
                 MAP HERE
             </div>
         </div>

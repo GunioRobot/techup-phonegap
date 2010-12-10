@@ -3,7 +3,6 @@
     
     getApiData = function () {
         var url, container;
-        
         // Api definition
         // /api/event/$id.json
         // /api/events/upcoming.json
@@ -13,7 +12,7 @@
         // console.log(buildCurrentTimestamp());
         // console.log(getlastRefresh() + 10);
         
-        console.log(JSON.parse(localStorage.getItem("events")));
+        //console.log(JSON.parse(localStorage.getItem("events")));
         
         if (buildCurrentTimestamp() < (getlastRefresh() + 5)) {
             console.log('skipped');
@@ -65,9 +64,15 @@
     
     render = function () {
         var events = retrieveEvents();
+        var ul;
+        var li = '';
         $.each(events, function (id, event) {
-            console.log(event);
+            li = li + '<li><h3><a href="#bar">' + event.name + '</a></h3><p class="ui-li-desc">' + event.dateFrom.date + ' - ' + event.dateTo.date + ', ' + event.city + '</p></li>';
+            console.log(event);        
         });
+        //ul = '<ul data-role="listview" data-theme="c">'+ li +'</ul>';
+        $('#content').html(li);
+        $('#content').listview('refresh', true);
     };
     
     storeDataInStorage = function (data) {
