@@ -31,7 +31,7 @@ window.techup = (function ($) {
     getApiDataSuccess = function (data) {
         localStorage.setItem("events", JSON.stringify(data.events));
         localStorage.setItem("lastRefresh", new Date().getTime());
-        render();
+        render(true);
     };
 
     getLastRefresh = function () {
@@ -47,7 +47,7 @@ window.techup = (function ($) {
         return JSON.parse(localStorage.getItem("events"));
     };
 
-    render = function () {
+    render = function (doRefresh) {
         var events, ul, li;
         events = retrieveEvents();
         ul = $('#content');
@@ -66,8 +66,10 @@ window.techup = (function ($) {
                 $('#detailview').data('meetup', selectedMeetup);
                 $.mobile.changePage('#detailview');
                 $.mobile.updateHash('#detailview/' + index); // This is a hack related to http://forum.jquery.com/topic/changepage-not-updating-hash-for-internal-div-pages
-            })
-            .listview('refresh', true);
+            });
+        if (doRefresh) {
+            ul.listview('refresh', true);
+        }
     };
 
     showMap = function() {
@@ -82,7 +84,6 @@ window.techup = (function ($) {
         var location, map, marker, meetup;
 
         meetup = $('#detailview').data('meetup');
-        console.log(meetup);
         location = new google.maps.LatLng(meetup.lat, meetup.lon);
         map = new google.maps.Map($('#meetupMap')[0], {
             zoom: 14,
