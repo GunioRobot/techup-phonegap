@@ -12,6 +12,9 @@
 
         // console.log(buildCurrentTimestamp());
         // console.log(getlastRefresh() + 10);
+        
+        console.log(JSON.parse(localStorage.getItem("events")));
+        
         if (buildCurrentTimestamp() < (getlastRefresh() + 5)) {
             console.log('skipped');
             return;
@@ -55,6 +58,10 @@
         return parseInt(lastRefresh, 10);
     };
     
+    getEventById = function (id) {
+        
+    };
+    
     storeDataInStorage = function (data) {
         var timestamp = 0;
         if (typeof(localStorage) == 'undefined') {
@@ -71,7 +78,7 @@
         // if (mycount<1) {
         // timestamp = new Date().getTime();
         //         timestamp = parseInt(timestamp / 1000, 10);
-        localStorage.setItem("events", data.events);
+        localStorage.setItem("events", JSON.stringify(data.events));
         localStorage.setItem("lastRefresh", buildCurrentTimestamp());
             // localStorage.setItem("Grand Rapids",
             // "loadFlickr('72157621350530834','37054878@N03')");
@@ -84,6 +91,8 @@
         //             $('#nav').append(myli);
         //         }
     };
+    
+    
     getApiData();
 
 }(jQuery));
