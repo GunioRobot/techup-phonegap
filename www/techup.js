@@ -1,5 +1,5 @@
 (function ($) {
-    var getApiData, getApiDataSuccess, getApiDataFail, buildCurrentTimestamp, getlastRefresh, storeDataInStorage;
+    var getApiData, getApiDataSuccess, getApiDataFail, buildCurrentTimestamp, getlastRefresh, storeDataInStorage, retrieveEvents;
     
     getApiData = function () {
         var url, container;
@@ -17,6 +17,7 @@
         
         if (buildCurrentTimestamp() < (getlastRefresh() + 5)) {
             console.log('skipped');
+            render();
             return;
         } else {
             console.log('not skipped');
@@ -58,8 +59,15 @@
         return parseInt(lastRefresh, 10);
     };
     
-    getEventById = function (id) {
-        
+    retrieveEvents = function () {
+        return JSON.parse(localStorage.getItem("events"));
+    };
+    
+    render = function () {
+        var events = retrieveEvents();
+        $.each(events, function (id, event) {
+            console.log(event);
+        });
     };
     
     storeDataInStorage = function (data) {
@@ -78,8 +86,12 @@
         // if (mycount<1) {
         // timestamp = new Date().getTime();
         //         timestamp = parseInt(timestamp / 1000, 10);
+        
+        
+        
         localStorage.setItem("events", JSON.stringify(data.events));
         localStorage.setItem("lastRefresh", buildCurrentTimestamp());
+        render();
             // localStorage.setItem("Grand Rapids",
             // "loadFlickr('72157621350530834','37054878@N03')");
         // }
@@ -94,5 +106,6 @@
     
     
     getApiData();
+    
 
 }(jQuery));
