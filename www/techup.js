@@ -8,32 +8,25 @@
         // /api/events/upcoming.json
         // /api/events/past.json
         // /api/user/$twittername.json
-
-        // console.log(buildCurrentTimestamp());
-        // console.log(getlastRefresh() + 10);
         
         //console.log(JSON.parse(localStorage.getItem("events")));
         
         if (buildCurrentTimestamp() < (getlastRefresh() + 5)) {
-            console.log('skipped');
+            console.log('Used Cached Data');
             render();
             return;
-        } else {
-            console.log('not skipped');
         }
-
+        console.log('Updating API Data');
         $.ajax({
             url: 'http://techup.ch/api/events/upcoming.json',
             success: getApiDataSuccess,
             error: getApiDataFail,
             dataType: 'json'
         });
-
     };
     
     getApiDataFail = function (e) {
-        alert('bang');
-        console.log(e);
+        alert('Could not connect to the API, probably a cross domain problem.');
     };
         
     getApiDataSuccess = function (data) {
@@ -67,14 +60,17 @@
         var ul = $('#content');
         var li = '';
         $.each(events, function (id, event) {
-            li = li + '<li data-index=' + id + '><h3><a href="#bar">' + event.name + '</a></h3><p class="ui-li-desc">' + event.dateFrom.date + ' - ' + event.dateTo.date + ', ' + event.city + '</p></li>';
+            li = li + '<li data-index=' + id + '><h3>' + event.name + '</h3><p class="ui-li-desc">' + event.dateFrom.date + ' - ' + event.dateTo.date + ', ' + event.city + '</p></li>';
         });
-        //ul = '<ul data-role="listview" data-theme="c">'+ li +'</ul>';
-        // ul.html(li)
-        //             .listview('refresh', true)
-        //             .touch(function(e) {
-        //                 var selectedMeetup = events[$(e.target).parent('li').data('index')];
-        //             });
+        ul.html(li)
+            .click(function(e) {
+                var index = $(e.target).parent('li').data('index');
+                var selectedMeetup = events[index];
+                $('#detailViewContent').jqotesub('#detailViewTemplate', selectedMeetup);
+                $.mobile.changePage('#detailview');
+                $.mobile.updateHash('#detailview/' + index); // This is a hack related to http://forum.jquery.com/topic/changepage-not-updating-hash-for-internal-div-pages
+            })
+            .listview('refresh', true);
     };
     
     storeDataInStorage = function (data) {

@@ -37,8 +37,29 @@
     {
         // do your thing!
     }
-
     </script>
+    
+    <script type="text/x-jqote-template" id="detailViewTemplate">
+            <![CDATA[
+                <h3><%= this.name %></h3>
+                <span><%= this.dateFrom.date %></span><br>
+                <span><%= this.location %></span><br>
+                <span><a href="<%= this.link %>"><%= this.link %></a></span>
+                <p><%= this.description %></p>
+                <div>
+                    <strong>Price:</strong> <span><%= this.price %></span>
+                </div>
+                <br>
+                <strong>Related Meetups:</strong><br>
+                <div class="meetupTags">
+                <% for(tag in this.tags) {%>
+                    <span><%= tag.name%></span>
+                <%}%>
+                </div>
+            ]]>
+    </script>
+    
+    
     <style type="text/css">
         .attendeelist li .ui-li-thumb {
              margin-top: -6px;
@@ -80,33 +101,12 @@
 
         <!-- Start of second page -->
         <div data-role="page" id="detailview">
-
             <div data-role="header">
                 <h1>&nbsp;</h1>
             </div><!-- /header -->
 
             <div data-role="content">
-                <h3 id="meetupName">Certified Java Enterprise Architect Bootcamp</h3>
-                <span id="eventDate">Mon, January 24th at 08:00</span><br>
-                <span id="meetupLocation">Technopark, Technoparkstrasse 1, Zürich</span><br>
-                <span id="meetupLink">http://aberla.com/</span>
-
-                <p id="meetupDescription">Become a Java architect in six days!<br>
-You are an experienced enterprise archite...</p>
-                <div id="pricebox">
-                    <strong>Price:</strong> <span id="price">CHF 6450</span>
-                </div>
-                <br>
-                <strong>Related Meetups:</strong><br>
-                <div class="meetupTags">
-                    <!-- city first-->
-                    <a href="#foo" class="tag">Zürich</a>
-                    <!-- now tags -->
-                    <a href="#foo" class="tag">java</a>
-                    <a href="#foo" class="tag">architect</a>
-                    <a href="#foo" class="tag">bootcamp</a>
-                    <a href="#foo" class="tag">certified</a>
-                </div>
+                <div id="detailViewContent"></div>
                 <ul data-role="listview" data-theme="c" data-inset="true">
                     <li><a href="#map">Map</a></li>
                     <li><a href="#attendees">Attendees</a></li>
