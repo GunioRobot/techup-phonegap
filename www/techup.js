@@ -24,9 +24,7 @@
         
     getApiDataSuccess = function (data) {
         // $('body').html(data);
-		alert('got the stuff');
-		alert(data);
-		console.log(data);
+        console.log(data);
     };
     getApiData();
     
