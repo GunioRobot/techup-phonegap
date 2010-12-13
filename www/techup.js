@@ -1,6 +1,6 @@
 window.techup = (function ($) {
     var initialize, getApiDataSuccess, getApiDataFail, getLastRefresh,
-    showMap, initMap, retrieveEvents;
+    showMap, initMap, retrieveEvents, fillAttendees;
 
     initialize = function () {
         // Api definition
@@ -22,6 +22,7 @@ window.techup = (function ($) {
         }
 
         $('#showMap').click(showMap);
+        $('#showAttendees').click(fillAttendees);
     };
 
     getApiDataFail = function (e) {
@@ -81,6 +82,12 @@ window.techup = (function ($) {
         } else {
             initMap();
         }
+    };
+
+    fillAttendees = function() {
+        meetup = $('#detailview').data('meetup');
+        $('#attendeesTitle').html(meetup.name);
+        $('#attendeesContainer').jqotesub('#attendeesTemplate', meetup).listview('refresh', true);
     };
 
     initMap = function() {

@@ -46,7 +46,6 @@
             <% } %>
         ]]>
         </script>
-
         <script type="text/x-jqote-template" id="mapTemplate">
         <![CDATA[
             <small><% this.name %></small>
@@ -54,6 +53,17 @@
             <a href="javascript:Device.exec('openmap:q=<% this.location %>');">Open in Google Maps</a>
             <div id="meetupMap" style="width:100%; height:260px">
             </div>
+        ]]>
+        </script>
+
+        <script type="text/x-jqote-template" id="attendeesTemplate">
+        <![CDATA[
+        <% for (var i=0, cnt=this.attendees.length; i<cnt; i++) { %>
+                    <li>
+                        <img src="http://img.tweetimag.es/i/<%= this.attendees[i].twitter_handle%>_m" class="ui-li-icon">
+                        <span><%= this.attendees[i].fullname %></span>
+                    </li>
+                <% } %>
         ]]>
         </script>
 
@@ -83,7 +93,7 @@
                 <div id="detailViewContent"></div>
                 <ul data-role="listview" data-theme="c" data-inset="true">
                     <li><a href="#map" id="showMap">Map</a></li>
-                    <!-- <li><a href="#attendees" id="showAttendees">Attendees</a></li> -->
+                    <li><a href="#attendees" id="showAttendees">Attendees</a></li>
                 </ul>
             </div>
 
@@ -105,13 +115,9 @@
                 <h1>&nbsp;</h1>
             </div>
             <div data-role="content">
-                <small>Certified Java Enterprise Architect Bootcamp</small>
+                <small id="attendeesTitle"></small>
                 <h3>Attendees</h3>
-
-                <ul class="attendeelist "data-role="listview" data-theme="c" data-inset="true">
-                    <li ><img src="http://img.tweetimag.es/i/bratwurstkomet_m" class="ui-li-icon"><a href="#foo">Bratwurstkomet</a></li>
-                    <li ><img src="http://img.tweetimag.es/i/bratwurstkomet_m" class="ui-li-icon"><a href="#foo">Bratwurstkomet</a></li>
-                    <li ><a href="#foo"><img src="http://img.tweetimag.es/i/bratwurstkomet_m" class="ui-li-icon">Bratwurstkomet</a></li>
+                <ul class="attendeelist "data-role="listview" data-theme="c" data-inset="true" id="attendeesContainer">
                 </ul>
             </div>
         </div>

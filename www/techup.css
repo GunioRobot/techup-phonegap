@@ -1,5 +1,12 @@
 .attendeelist li .ui-li-thumb {
-    margin-top: -6px;
+    margin-top: -16px;
+}
+img.ui-li-icon {
+    top: 0.3em;
+    left: 4px;
+}
+.ui-li span {
+    margin-left: 18px
 }
 .attendeelist li .ui-icon-arrow-r {
     display: none;
