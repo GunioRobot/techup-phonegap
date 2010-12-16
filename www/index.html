@@ -48,9 +48,9 @@
         </script>
         <script type="text/x-jqote-template" id="mapTemplate">
         <![CDATA[
-            <small><% this.name %></small>
-            <h3><% this.location %></h3>
-            <a href="javascript:Device.exec('openmap:q=<% this.location %>');">Open in Google Maps</a>
+            <small><%= this.name %></small>
+            <h3><%= this.location %></h3>
+            <a href="javascript:Device.exec('openmap:q=<%= this.location %>');">Open in Google Maps</a>
             <div id="meetupMap" style="width:100%; height:260px">
             </div>
         ]]>

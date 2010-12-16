@@ -66,7 +66,7 @@ window.techup = (function ($) {
                 $('#detailViewContent').jqotesub('#detailViewTemplate', selectedMeetup);
                 $('#detailview').data('meetup', selectedMeetup);
                 $.mobile.changePage('#detailview');
-                $.mobile.updateHash('#detailview/' + index); // This is a hack related to http://forum.jquery.com/topic/changepage-not-updating-hash-for-internal-div-pages
+                $.mobile.updateHash('#detailview'); // This is a hack related to http://forum.jquery.com/topic/changepage-not-updating-hash-for-internal-div-pages
             });
         if (doRefresh) {
             ul.listview('refresh', true);
