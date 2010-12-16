@@ -8,7 +8,6 @@ window.techup = (function ($) {
         // /api/events/upcoming.json
         // /api/events/past.json
         // /api/user/$twittername.json
-
         render();
 
         // refresh outdated cache
@@ -61,6 +60,7 @@ window.techup = (function ($) {
         });
         ul.html(li)
             .click(function(e) {
+                e.stopImmediatePropagation();
                 var index = $(e.target).closest('li').data('index');
                 var selectedMeetup = events[index];
                 $('#detailViewContent').jqotesub('#detailViewTemplate', selectedMeetup);
@@ -68,9 +68,11 @@ window.techup = (function ($) {
                 $.mobile.changePage('#detailview');
                 $.mobile.updateHash('#detailview'); // This is a hack related to http://forum.jquery.com/topic/changepage-not-updating-hash-for-internal-div-pages
             });
-        if (doRefresh) {
+        try {
             ul.listview('refresh', true);
+        } catch(e) {
         }
+
     };
 
     showMap = function() {

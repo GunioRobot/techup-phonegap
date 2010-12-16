@@ -29,7 +29,7 @@
             <span><%= (this.dateFrom) ? this.dateFrom.date : '' %></span><br>
             <span><%= this.location %></span><br>
             <span><a href="<%= this.link %>"><%= this.link %></a></span>
-            <p><%= this.description.replace(/\n/, '<br/>') %></p>
+            <p><%= this.description.replace(/\n/g, '<br/>') %></p>
             <% if (this.price) { %>
                 <p>
                     <strong>Price:</strong> <span><%= this.price %> CHF</span>
@@ -117,7 +117,7 @@
             <div data-role="content">
                 <small id="attendeesTitle"></small>
                 <h3>Attendees</h3>
-                <ul class="attendeelist "data-role="listview" data-theme="c" data-inset="true" id="attendeesContainer">
+                <ul class="attendeelist" data-role="listview" data-theme="c" data-inset="true" id="attendeesContainer">
                 </ul>
             </div>
         </div>
