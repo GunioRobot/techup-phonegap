@@ -23,6 +23,17 @@
         <!-- <script src="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"></script> -->
         <script src="jquery.mobile-1.0a2.min.js"></script>
 
+        <script type="text/x-jqote-template" id="listViewTemplate">
+        <![CDATA[
+        <% for (var i=0, cnt=this.events.length; i<cnt; i++) { %>
+            <li data-index="<%= i %>">
+                <h3><%= this.events[i].name %></h3>
+                <p class="ui-li-desc"><%= this.events[i].city %>, <%= (this.formatDate(this.events[i].dateFrom.date) + ' to ' + this.formatDate(this.events[i].dateTo.date)) %></p>
+            </li>
+        <% } %>
+        ]]>
+        </script>
+
         <script type="text/x-jqote-template" id="detailViewTemplate">
         <![CDATA[
             <h3><%= this.name %></h3>
@@ -52,6 +63,7 @@
             </ul>
         ]]>
         </script>
+
         <script type="text/x-jqote-template" id="mapTemplate">
         <![CDATA[
             <small><%= this.name %></small>
@@ -75,13 +87,13 @@
 
     </head>
     <body>
-        <div data-role="page" id="foo">
+        <div data-role="page" id="listView">
             <div data-role="header">
                 <h1>Upcoming</h1>
             </div>
 
             <div data-role="content" >
-                <ul data-role="listview" data-theme="c" id="content">
+                <ul data-role="listview" data-theme="c" id="listViewContent">
                 </ul>
             </div>
 

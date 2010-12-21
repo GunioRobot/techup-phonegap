@@ -1,6 +1,6 @@
 window.techup = (function ($) {
     var initialize, getApiDataSuccess, getApiDataFail, getLastRefresh,
-    showMap, initMap, retrieveEvents, fillAttendees;
+    showMap, initMap, retrieveEvents, fillAttendees, dateFormatter;
 
     initialize = function () {
         // Api definition
@@ -19,9 +19,6 @@ window.techup = (function ($) {
                 dataType: 'json'
             });
         }
-
-        $('#showMap').click(showMap);
-        $('#showAttendees').click(fillAttendees);
     };
 
     getApiDataFail = function (e) {
@@ -50,15 +47,12 @@ window.techup = (function ($) {
     render = function (doRefresh) {
         var events, ul, li;
         events = retrieveEvents();
-        ul = $('#content');
+        ul = $('#listViewContent');
         li = '';
         if (events === null) {
             return;
         }
-        $.each(events, function (id, event) {
-            li = li + '<li data-index=' + id + '><h3>' + event.name + '</h3><p class="ui-li-desc">' + event.dateFrom.date + ' - ' + event.dateTo.date + ', ' + event.city + '</p></li>';
-        });
-        ul.html(li)
+        ul.jqotesub('#listViewTemplate', {events: events, formatDate: dateFormatter})
             .click(function(e) {
                 e.stopImmediatePropagation();
                 var index = $(e.target).closest('li').data('index');
@@ -67,6 +61,8 @@ window.techup = (function ($) {
                     .jqotesub('#detailViewTemplate', selectedMeetup)
                     .find('ul').listview();
                 $('#detailview').data('meetup', selectedMeetup);
+                $('#showMap').click(showMap);
+                $('#showAttendees').click(fillAttendees);
                 $.mobile.changePage('#detailview');
                 $.mobile.updateHash('#detailview'); // This is a hack related to http://forum.jquery.com/topic/changepage-not-updating-hash-for-internal-div-pages
             });
@@ -74,7 +70,6 @@ window.techup = (function ($) {
             ul.listview('refresh', true);
         } catch(e) {
         }
-
     };
 
     showMap = function() {
@@ -111,6 +106,16 @@ window.techup = (function ($) {
             position: location,
             map: map
         });
+    };
+
+    dateFormatter = function (date) {
+        var matches = date.match(/(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)/);
+        date = new Date(matches[1], matches[2], matches[3], matches[4], matches[5], matches[6]);
+        return (date.getDate() < 10 ? '0' : '') + date.getDate() +
+            '.' + (date.getMonth() < 9 ? '0' : '') + (date.getMonth() + 1) +
+            '.' + date.getFullYear() +
+            ' ' + (date.getHours() < 10 ? '0' : '') + date.getHours() +
+            ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
     };
 
     $(document).bind('deviceready', function() {
