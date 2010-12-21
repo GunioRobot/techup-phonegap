@@ -28,7 +28,9 @@
             <h3><%= this.name %></h3>
             <span><%= (this.dateFrom) ? this.dateFrom.date : '' %></span><br>
             <span><%= this.location %></span><br>
-            <span><a href="<%= this.link %>"><%= this.link %></a></span>
+            <% if (this.link) { %>
+                <span><a href="<%= this.link %>"><%= this.link %></a></span>
+            <% } %>
             <p><%= this.description.replace(/\n/g, '<br/>') %></p>
             <% if (this.price) { %>
                 <p>
