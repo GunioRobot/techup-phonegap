@@ -46,6 +46,10 @@
                 <% } %>
                 </div>
             <% } %>
+            <ul data-role="listview" data-theme="c" data-inset="true">
+                <li><a href="#map" id="showMap">Map</a></li>
+                <li><a href="#attendees" id="showAttendees">Attendees (<%= this.attendees.length %>)</a></li>
+            </ul>
         ]]>
         </script>
         <script type="text/x-jqote-template" id="mapTemplate">
@@ -93,10 +97,6 @@
 
             <div data-role="content">
                 <div id="detailViewContent"></div>
-                <ul data-role="listview" data-theme="c" data-inset="true">
-                    <li><a href="#map" id="showMap">Map</a></li>
-                    <li><a href="#attendees" id="showAttendees">Attendees</a></li>
-                </ul>
             </div>
 
             <!-- <div data-role="footer" data-position="fixed">

@@ -63,7 +63,9 @@ window.techup = (function ($) {
                 e.stopImmediatePropagation();
                 var index = $(e.target).closest('li').data('index');
                 var selectedMeetup = events[index];
-                $('#detailViewContent').jqotesub('#detailViewTemplate', selectedMeetup);
+                $('#detailViewContent')
+                    .jqotesub('#detailViewTemplate', selectedMeetup)
+                    .find('ul').listview();
                 $('#detailview').data('meetup', selectedMeetup);
                 $.mobile.changePage('#detailview');
                 $.mobile.updateHash('#detailview'); // This is a hack related to http://forum.jquery.com/topic/changepage-not-updating-hash-for-internal-div-pages
