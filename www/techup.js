@@ -53,7 +53,7 @@ window.techup = (function ($) {
             return;
         }
         ul.jqotesub('#listViewTemplate', {events: events, formatDate: dateFormatter})
-            .click(function(e) {
+            .click(function (e) {
                 e.stopImmediatePropagation();
                 var index = $(e.target).closest('li').data('index');
                 var selectedMeetup = events[index];
@@ -72,7 +72,7 @@ window.techup = (function ($) {
         }
     };
 
-    showMap = function() {
+    showMap = function () {
         var meetup;
         meetup = $('#detailview').data('meetup');
         $('#mapContent').jqotesub('#mapTemplate', meetup);
@@ -83,13 +83,13 @@ window.techup = (function ($) {
         }
     };
 
-    fillAttendees = function() {
+    fillAttendees = function () {
         meetup = $('#detailview').data('meetup');
         $('#attendeesTitle').html(meetup.name);
         $('#attendeesContainer').jqotesub('#attendeesTemplate', meetup).listview('refresh', true);
     };
 
-    initMap = function() {
+    initMap = function () {
         var location, map, marker, meetup;
 
         meetup = $('#detailview').data('meetup');
@@ -118,7 +118,7 @@ window.techup = (function ($) {
             ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
     };
 
-    $(document).bind('deviceready', function() {
+    $(document).bind('deviceready', function () {
         initialize();
     });
 
@@ -126,12 +126,12 @@ window.techup = (function ($) {
     if (navigator.userAgent.indexOf('Windows') ||
         navigator.userAgent.indexOf('Linux') ||
         navigator.userAgent.indexOf('Macintosh')) {
-        $(function() {
+        $(function () {
             initialize();
         });
     }
 
     return {
         initMap: initMap
-    }
+    };
 }(jQuery));
